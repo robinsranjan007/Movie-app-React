@@ -31,11 +31,8 @@ const ReviewsAndRatings = ({ movieId }) => {
   const fetchReviews = async () => {
     try {
       const response = await axios.get("http://localhost:5000/reviews");
-
       const movieReviews = response.data.filter((r) => r.movieId.toString() === movieId.toString());
       setReviews(movieReviews);
-
-      // ✅ Find if the logged-in user has already reviewed
       const userExistingReview = movieReviews.find((r) => r.userId === userId);
       setUserReview(userExistingReview || null);
     } catch (error) {
@@ -43,38 +40,67 @@ const ReviewsAndRatings = ({ movieId }) => {
     }
   };
 
-  // ✅ Handle Submitting a New Review (Fixed)
+  // ✅ Handle Submitting a New Review
   const handleSubmitReview = async () => {
     if (!isLoggedIn) {
       alert("Please log in to post a review.");
       return;
     }
-
     if (userReview) {
       alert("You have already posted a review. Edit your existing one.");
       return;
     }
 
     const newReview = {
-      id: Date.now().toString(), // Ensure unique ID
-      movieId: movieId.toString(), // Fix potential type mismatch
-      userId: userId,
-      username: username,
-      rating: rating,
-      reviewText: reviewText,
-      adminReply: "", // Ensure this field exists
+      id: Date.now().toString(),
+      movieId: movieId.toString(),
+      userId,
+      username,
+      rating,
+      reviewText,
+      adminReply: "", // Ensures admin reply is saved
     };
 
     try {
       await axios.post("http://localhost:5000/reviews", newReview);
-
-      // ✅ Update UI instantly after posting
-      setReviews((prevReviews) => [...prevReviews, newReview]);
-      setUserReview(newReview); // ✅ Prevent duplicate reviews
+      setReviews([...reviews, newReview]);
+      setUserReview(newReview);
       setReviewText("");
       setRating(0);
     } catch (error) {
       console.error("Error posting review:", error);
+    }
+  };
+
+  // ✅ Handle Editing a Review
+  const handleEdit = (review) => {
+    setEditingReviewId(review.id);
+    setEditText(review.reviewText);
+    setEditRating(review.rating);
+  };
+
+  // ✅ Handle Saving an Edited Review
+  const handleSaveEdit = async () => {
+    if (!editText.trim()) {
+      alert("Review cannot be empty!");
+      return;
+    }
+
+    try {
+      await axios.patch(`http://localhost:5000/reviews/${editingReviewId}`, {
+        reviewText: editText,
+        rating: editRating,
+      });
+
+      const updatedReviews = reviews.map((review) =>
+        review.id === editingReviewId ? { ...review, reviewText: editText, rating: editRating } : review
+      );
+
+      setReviews(updatedReviews);
+      setUserReview(updatedReviews.find((r) => r.userId === userId) || null);
+      setEditingReviewId(null);
+    } catch (error) {
+      console.error("Error updating review:", error);
     }
   };
 
@@ -95,22 +121,18 @@ const ReviewsAndRatings = ({ movieId }) => {
       );
 
       setReviews(updatedReviews);
-      setAdminReplies((prev) => ({ ...prev, [id]: "" })); // ✅ Keep original design, clear field after UI update
+      setAdminReplies((prev) => ({ ...prev, [id]: "" }));
     } catch (error) {
       console.error("Error adding reply:", error);
     }
   };
 
-  // ✅ Handle Delete Review (Admin can delete any review, user can delete their own)
+  // ✅ Handle Deleting a Review
   const handleDelete = async (id) => {
     try {
       await axios.delete(`http://localhost:5000/reviews/${id}`);
-
-      // ✅ Update UI instantly
       const updatedReviews = reviews.filter((review) => review.id !== id);
       setReviews(updatedReviews);
-
-      // ✅ If the user deleted their own review, reset their ability to post again
       if (userReview && userReview.id === id) {
         setUserReview(null);
       }
@@ -122,14 +144,6 @@ const ReviewsAndRatings = ({ movieId }) => {
   return (
     <div className="bg-gray-900 text-white p-6 rounded-lg">
       <h2 className="text-2xl font-bold mb-4">Reviews & Ratings</h2>
-
-      {/* ✅ Hide "Add to Favorites" & "Watch Later" for Admin */}
-      {userRole !== "admin" && (
-        <div className="mb-4 flex space-x-4">
-          <button className="bg-red-600 px-4 py-2 rounded text-white">Add to Favorites</button>
-          <button className="bg-blue-600 px-4 py-2 rounded text-white">Watch Later</button>
-        </div>
-      )}
 
       {/* ✅ Show Review Form Only If User Hasn't Reviewed */}
       {!userReview && isLoggedIn && (
@@ -164,17 +178,16 @@ const ReviewsAndRatings = ({ movieId }) => {
               <div>
                 <p className="font-bold">{review.username}</p>
                 <div className="flex text-yellow-400">
-                  {[...Array(review.rating)].map((_, i) => (
-                    <FaStar key={i} />
+                  {[1, 2, 3, 4, 5].map((star) => (
+                    <FaStar key={star} className={star <= review.rating ? "text-yellow-400" : "text-gray-600"} />
                   ))}
                 </div>
               </div>
 
-              {/* ✅ Admin Delete or User Edit/Delete */}
               {(review.userId === userId || userRole === "admin") && (
                 <div className="flex space-x-2">
                   {review.userId === userId && (
-                    <button className="text-yellow-500">
+                    <button onClick={() => handleEdit(review)} className="text-yellow-500">
                       <FaEdit />
                     </button>
                   )}
@@ -185,13 +198,10 @@ const ReviewsAndRatings = ({ movieId }) => {
               )}
             </div>
 
-            {/* ✅ Show User's Review Text */}
             <p className="mt-2">{review.reviewText}</p>
-
-            {/* ✅ Admin Reply */}
             {review.adminReply && <p className="text-blue-400 mt-2">Admin: {review.adminReply}</p>}
-            
-            {/* ✅ Smaller, More Beautiful Reply Button */}
+
+            {/* ✅ Admin Reply Section (Always Visible) */}
             {userRole === "admin" && (
               <div className="mt-2 flex items-center">
                 <textarea
