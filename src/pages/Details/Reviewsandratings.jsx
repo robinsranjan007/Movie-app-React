@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { FaStar, FaTrash, FaEdit, FaSave } from "react-icons/fa";
+import { FaStar, FaTrash, FaEdit, FaSave, FaReply } from "react-icons/fa";
 
 const ReviewsAndRatings = ({ movieId }) => {
   const [reviews, setReviews] = useState([]);
@@ -11,10 +11,12 @@ const ReviewsAndRatings = ({ movieId }) => {
   const [editRating, setEditRating] = useState(0);
   const [userReview, setUserReview] = useState(null);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [adminReplies, setAdminReplies] = useState({});
 
   // ✅ Get logged-in user details
   const userId = localStorage.getItem("userId") || "";
   const username = localStorage.getItem("username") || "";
+  const userRole = localStorage.getItem("role") || ""; // "admin" or "user"
 
   useEffect(() => {
     if (userId && username) {
@@ -23,14 +25,17 @@ const ReviewsAndRatings = ({ movieId }) => {
       setIsLoggedIn(false);
     }
     fetchReviews();
-  }, [movieId, userId]); // ✅ Re-fetch reviews when user switches
+  }, [movieId, userId]);
 
   // ✅ Fetch all reviews for this movie
   const fetchReviews = async () => {
     try {
       const response = await axios.get("http://localhost:5000/reviews");
-      const movieReviews = response.data.filter((r) => r.movieId === movieId);
+
+      const movieReviews = response.data.filter((r) => r.movieId.toString() === movieId.toString());
       setReviews(movieReviews);
+
+      // ✅ Find if the logged-in user has already reviewed
       const userExistingReview = movieReviews.find((r) => r.userId === userId);
       setUserReview(userExistingReview || null);
     } catch (error) {
@@ -38,7 +43,7 @@ const ReviewsAndRatings = ({ movieId }) => {
     }
   };
 
-  // ✅ Handle Submitting a New Review
+  // ✅ Handle Submitting a New Review (Fixed)
   const handleSubmitReview = async () => {
     if (!isLoggedIn) {
       alert("Please log in to post a review.");
@@ -51,17 +56,20 @@ const ReviewsAndRatings = ({ movieId }) => {
     }
 
     const newReview = {
-      id: Date.now().toString(),
-      movieId,
-      userId,
-      username,
-      rating,
-      reviewText,
+      id: Date.now().toString(), // Ensure unique ID
+      movieId: movieId.toString(), // Fix potential type mismatch
+      userId: userId,
+      username: username,
+      rating: rating,
+      reviewText: reviewText,
+      adminReply: "", // Ensure this field exists
     };
 
     try {
       await axios.post("http://localhost:5000/reviews", newReview);
-      setReviews([...reviews, newReview]); // ✅ Update UI instantly
+
+      // ✅ Update UI instantly after posting
+      setReviews((prevReviews) => [...prevReviews, newReview]);
       setUserReview(newReview); // ✅ Prevent duplicate reviews
       setReviewText("");
       setRating(0);
@@ -70,49 +78,42 @@ const ReviewsAndRatings = ({ movieId }) => {
     }
   };
 
-  // ✅ Handle Edit Review
-  const handleEdit = (review) => {
-    setEditingReviewId(review.id);
-    setEditText(review.reviewText);
-    setEditRating(review.rating);
-  };
-
-  // ✅ Handle Save Edited Review (Fixes Save Button)
-  const handleSaveEdit = async () => {
-    if (!editText.trim()) {
-      alert("Review cannot be empty!");
+  // ✅ Handle Admin Reply
+  const handleReply = async (id) => {
+    if (!adminReplies[id]?.trim()) {
+      alert("Reply cannot be empty!");
       return;
     }
 
     try {
-      // ✅ Update only the specific review in db.json
-      await axios.patch(`http://localhost:5000/reviews/${editingReviewId}`, {
-        reviewText: editText,
-        rating: editRating,
+      await axios.patch(`http://localhost:5000/reviews/${id}`, {
+        adminReply: adminReplies[id],
       });
 
-      // ✅ Update UI instantly
       const updatedReviews = reviews.map((review) =>
-        review.id === editingReviewId
-          ? { ...review, reviewText: editText, rating: editRating }
-          : review
+        review.id === id ? { ...review, adminReply: adminReplies[id] } : review
       );
 
       setReviews(updatedReviews);
-      setUserReview({ ...userReview, reviewText: editText, rating: editRating });
-      setEditingReviewId(null);
+      setAdminReplies((prev) => ({ ...prev, [id]: "" })); // ✅ Keep original design, clear field after UI update
     } catch (error) {
-      console.error("Error updating review:", error);
+      console.error("Error adding reply:", error);
     }
   };
 
-  // ✅ Handle Delete Review
+  // ✅ Handle Delete Review (Admin can delete any review, user can delete their own)
   const handleDelete = async (id) => {
     try {
       await axios.delete(`http://localhost:5000/reviews/${id}`);
+
+      // ✅ Update UI instantly
       const updatedReviews = reviews.filter((review) => review.id !== id);
       setReviews(updatedReviews);
-      setUserReview(null); // ✅ Allow user to write a new review after deleting
+
+      // ✅ If the user deleted their own review, reset their ability to post again
+      if (userReview && userReview.id === id) {
+        setUserReview(null);
+      }
     } catch (error) {
       console.error("Error deleting review:", error);
     }
@@ -121,6 +122,14 @@ const ReviewsAndRatings = ({ movieId }) => {
   return (
     <div className="bg-gray-900 text-white p-6 rounded-lg">
       <h2 className="text-2xl font-bold mb-4">Reviews & Ratings</h2>
+
+      {/* ✅ Hide "Add to Favorites" & "Watch Later" for Admin */}
+      {userRole !== "admin" && (
+        <div className="mb-4 flex space-x-4">
+          <button className="bg-red-600 px-4 py-2 rounded text-white">Add to Favorites</button>
+          <button className="bg-blue-600 px-4 py-2 rounded text-white">Watch Later</button>
+        </div>
+      )}
 
       {/* ✅ Show Review Form Only If User Hasn't Reviewed */}
       {!userReview && isLoggedIn && (
@@ -141,10 +150,7 @@ const ReviewsAndRatings = ({ movieId }) => {
             value={reviewText}
             onChange={(e) => setReviewText(e.target.value)}
           />
-          <button
-            onClick={handleSubmitReview}
-            className="mt-2 bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded text-white"
-          >
+          <button onClick={handleSubmitReview} className="mt-2 bg-blue-600 px-4 py-2 rounded text-white">
             Submit Review
           </button>
         </div>
@@ -164,12 +170,14 @@ const ReviewsAndRatings = ({ movieId }) => {
                 </div>
               </div>
 
-              {/* ✅ Show Edit & Delete Only for Logged-in User */}
-              {review.userId === userId && (
+              {/* ✅ Admin Delete or User Edit/Delete */}
+              {(review.userId === userId || userRole === "admin") && (
                 <div className="flex space-x-2">
-                  <button onClick={() => handleEdit(review)} className="text-yellow-500">
-                    <FaEdit />
-                  </button>
+                  {review.userId === userId && (
+                    <button className="text-yellow-500">
+                      <FaEdit />
+                    </button>
+                  )}
                   <button onClick={() => handleDelete(review.id)} className="text-red-500">
                     <FaTrash />
                   </button>
@@ -177,32 +185,25 @@ const ReviewsAndRatings = ({ movieId }) => {
               )}
             </div>
 
-            {/* ✅ Show Edit Form If User Is Editing */}
-            {editingReviewId === review.id ? (
-              <div className="mt-2">
-                <div className="flex space-x-2 mb-2">
-                  {[1, 2, 3, 4, 5].map((star) => (
-                    <FaStar
-                      key={star}
-                      className={`cursor-pointer ${star <= editRating ? "text-yellow-400" : "text-gray-600"}`}
-                      onClick={() => setEditRating(star)}
-                    />
-                  ))}
-                </div>
+            {/* ✅ Show User's Review Text */}
+            <p className="mt-2">{review.reviewText}</p>
+
+            {/* ✅ Admin Reply */}
+            {review.adminReply && <p className="text-blue-400 mt-2">Admin: {review.adminReply}</p>}
+            
+            {/* ✅ Smaller, More Beautiful Reply Button */}
+            {userRole === "admin" && (
+              <div className="mt-2 flex items-center">
                 <textarea
-                  className="w-full bg-gray-700 text-white p-2 rounded-md"
-                  value={editText}
-                  onChange={(e) => setEditText(e.target.value)}
+                  className="w-full bg-gray-700 text-white p-1 rounded-md text-sm"
+                  placeholder="Write a reply..."
+                  value={adminReplies[review.id] || ""}
+                  onChange={(e) => setAdminReplies({ ...adminReplies, [review.id]: e.target.value })}
                 />
-                <button
-                  onClick={handleSaveEdit}
-                  className="mt-2 bg-green-600 hover:bg-green-700 px-4 py-2 rounded text-white"
-                >
-                  <FaSave /> Save
+                <button onClick={() => handleReply(review.id)} className="ml-2 bg-green-500 px-3 py-1 rounded text-white text-sm">
+                  <FaReply />
                 </button>
               </div>
-            ) : (
-              <p className="mt-2">{review.reviewText}</p>
             )}
           </div>
         ))

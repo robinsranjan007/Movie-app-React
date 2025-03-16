@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { FaHeart, FaClock } from "react-icons/fa";
-import ReviewsAndRatings from "./Reviewsandratings";
+import ReviewsAndRatings from "./ReviewsAndRatings";
 
 const API_KEY = import.meta.env.VITE_TMDB_API_KEY;
 const IMAGE_BASE_URL = "https://image.tmdb.org/t/p/w500";
@@ -12,11 +12,11 @@ const MoviesDetails = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const userId = localStorage.getItem("userId");
+  const userRole = localStorage.getItem("role");
 
   const [movie, setMovie] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
-
   const [favorites, setFavorites] = useState([]);
   const [watchLater, setWatchLater] = useState([]);
 

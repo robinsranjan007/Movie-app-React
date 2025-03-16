@@ -8,7 +8,26 @@
       "username": "admin",
       "email": "admin@gmail.com",
       "password": "admin123",
-      "role": "admin"
+      "role": "admin",
+      "watchLater": [
+        {
+          "id": 777443,
+          "title": "The Electric State",
+          "poster": "/jRdxyW5ZmhD3ycStlb7gwOewTuE.jpg"
+        },
+        {
+          "id": 950396,
+          "title": "The Gorge",
+          "poster": "/7iMBZzVZtG0oBug4TfqDb9ZxAOa.jpg"
+        }
+      ],
+      "likedMovies": [
+        {
+          "id": 777443,
+          "title": "The Electric State",
+          "poster": "/jRdxyW5ZmhD3ycStlb7gwOewTuE.jpg"
+        }
+      ]
     },
     {
       "id": "9621",
@@ -20,20 +39,8 @@
       "password": "naruto",
       "confirmPassword": "naruto",
       "playlist": [],
-      "likedMovies": [
-        {
-          "id": 777443,
-          "title": "The Electric State",
-          "poster": "/jRdxyW5ZmhD3ycStlb7gwOewTuE.jpg"
-        }
-      ],
-      "watchLater": [
-        {
-          "id": 777443,
-          "title": "The Electric State",
-          "poster": "/jRdxyW5ZmhD3ycStlb7gwOewTuE.jpg"
-        }
-      ],
+      "likedMovies": [],
+      "watchLater": [],
       "ratings": [],
       "reviews": []
     },
@@ -101,6 +108,11 @@
           "id": 950396,
           "title": "The Gorge",
           "poster": "/7iMBZzVZtG0oBug4TfqDb9ZxAOa.jpg"
+        },
+        {
+          "id": 777443,
+          "title": "The Electric State",
+          "poster": "/jRdxyW5ZmhD3ycStlb7gwOewTuE.jpg"
         }
       ],
       "watchLater": [
@@ -121,37 +133,14 @@
         }
       ],
       "ratings": [],
-      "reviews": []
-    },
-    {
-      "id": "58b4",
-      "firstName": "goku",
-      "lastName": "son",
-      "age": "32",
-      "username": "songoku",
-      "email": "goku@gmail.com",
-      "password": "goku",
-      "confirmPassword": "goku",
-      "playlist": [],
-      "likedMovies": [],
-      "watchLater": [],
-      "ratings": [],
-      "reviews": []
-    },
-    {
-      "id": "9a11",
-      "firstName": "sakura",
-      "lastName": "haruno",
-      "age": "17",
-      "username": "sakura",
-      "email": "sakura@gmail.com",
-      "password": "sakura",
-      "confirmPassword": "sakura",
-      "playlist": [],
-      "likedMovies": [],
-      "watchLater": [],
-      "ratings": [],
-      "reviews": []
+      "reviews": [],
+      "watchLaterTvShows": [
+        {
+          "id": 71914,
+          "title": "The Wheel of Time",
+          "poster": "/eVm7vI0VTUKYzgpOXCUu9qz3L4E.jpg"
+        }
+      ]
     }
   ],
   "reviews": [
@@ -161,15 +150,9 @@
       "userId": "9621",
       "username": "naruto",
       "rating": 4,
-      "reviewText": "this is a awesome"
-    },
-    {
-      "id": "1742095620812",
-      "movieId": "777443",
-      "userId": "c676",
-      "username": "sasuke",
-      "rating": 1,
-      "reviewText": "this is amazing"
+      "reviewText": "this is awesome",
+      "adminReply": "thanks for the feedback",
+      "reply": "thanks naruto for the feedback"
     },
     {
       "id": "1742095693355",
@@ -177,23 +160,8 @@
       "userId": "c676",
       "username": "sasuke",
       "rating": 4,
-      "reviewText": "i have always wanted to watch this movie"
-    },
-    {
-      "id": "1742096057708",
-      "movieId": "777443",
-      "userId": "e3ba",
-      "username": "gara",
-      "rating": 4,
-      "reviewText": "must watch this"
-    },
-    {
-      "id": "1742098346437",
-      "movieId": "278",
-      "userId": "e3ba",
-      "username": "gara",
-      "rating": 3,
-      "reviewText": "great"
+      "reviewText": "i have always wanted to watch this movie",
+      "adminReply": ""
     },
     {
       "id": "1742107506428",
@@ -201,7 +169,9 @@
       "userId": "e3ba",
       "username": "gara",
       "rating": 5,
-      "reviewText": "this is amazing"
+      "reviewText": "this is amazing",
+      "adminReply": "thanks",
+      "reply": "thanks again"
     },
     {
       "id": "1742107573202",
@@ -209,7 +179,8 @@
       "userId": "9621",
       "username": "naruto",
       "rating": 5,
-      "reviewText": "awesome"
+      "reviewText": "awesome",
+      "adminReply": "thanks naruto"
     },
     {
       "id": "1742107633206",
@@ -217,7 +188,8 @@
       "userId": "58b4",
       "username": "songoku",
       "rating": 4,
-      "reviewText": "wow"
+      "reviewText": "wow",
+      "adminReply": ""
     },
     {
       "id": "1742117105285",
@@ -225,7 +197,45 @@
       "userId": "9a11",
       "username": "sakura",
       "rating": 5,
-      "reviewText": "great"
+      "reviewText": "great",
+      "adminReply": "thanks sakura",
+      "reply": "Thanks sakura"
+    },
+    {
+      "id": "1742122094586",
+      "movieId": "1126166",
+      "userId": "e3ba",
+      "username": "gara",
+      "rating": 5,
+      "reviewText": "great",
+      "adminReply": ""
+    },
+    {
+      "id": "1742122611274",
+      "movieId": "71914",
+      "userId": "e3ba",
+      "username": "gara",
+      "rating": 4,
+      "reviewText": "nice",
+      "adminReply": ""
+    },
+    {
+      "id": "1742124358802",
+      "movieId": "278",
+      "userId": "e3ba",
+      "username": "gara",
+      "rating": 5,
+      "reviewText": "blah blah",
+      "adminReply": ""
+    },
+    {
+      "id": "1742128777132",
+      "movieId": "777443",
+      "userId": "e3ba",
+      "username": "gara",
+      "rating": 5,
+      "reviewText": "this movies is really good",
+      "adminReply": ""
     }
   ],
   "ratings": []
