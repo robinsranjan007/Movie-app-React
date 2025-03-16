@@ -1,0 +1,19 @@
+@import "tailwindcss";
+
+/* index.css or globals.css */
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+    /* Very dark black with slight transparency */ /* transparent black background */
+  color: text; /* Optional: to make the text white */
+  font-family: Arial, sans-serif; /* Optional: choose your preferred font */
+}
+
+* {
+  box-sizing: border-box;
+}
+
+ 

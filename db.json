@@ -1,0 +1,232 @@
+{
+  "users": [
+    {
+      "id": "admin001",
+      "firstName": "Admin",
+      "lastName": "User",
+      "age": "30",
+      "username": "admin",
+      "email": "admin@gmail.com",
+      "password": "admin123",
+      "role": "admin"
+    },
+    {
+      "id": "9621",
+      "firstName": "naruto",
+      "lastName": "uzumaki",
+      "age": "14",
+      "username": "naruto",
+      "email": "naruto@gmail.com",
+      "password": "naruto",
+      "confirmPassword": "naruto",
+      "playlist": [],
+      "likedMovies": [
+        {
+          "id": 777443,
+          "title": "The Electric State",
+          "poster": "/jRdxyW5ZmhD3ycStlb7gwOewTuE.jpg"
+        }
+      ],
+      "watchLater": [
+        {
+          "id": 777443,
+          "title": "The Electric State",
+          "poster": "/jRdxyW5ZmhD3ycStlb7gwOewTuE.jpg"
+        }
+      ],
+      "ratings": [],
+      "reviews": []
+    },
+    {
+      "id": "c676",
+      "firstName": "sasuke",
+      "lastName": "uchiha",
+      "age": "17",
+      "username": "sasuke",
+      "email": "sasuke@gmail.com",
+      "password": "sasuke",
+      "confirmPassword": "sasuke",
+      "playlist": [],
+      "likedMovies": [
+        {
+          "id": 1241982,
+          "title": "Moana 2",
+          "poster": "/aLVkiINlIeCkcZIzb7XHzPYgO6L.jpg"
+        },
+        {
+          "id": 777443,
+          "title": "The Electric State",
+          "poster": "/jRdxyW5ZmhD3ycStlb7gwOewTuE.jpg"
+        }
+      ],
+      "watchLater": [
+        {
+          "id": 1241982,
+          "title": "Moana 2",
+          "poster": "/aLVkiINlIeCkcZIzb7XHzPYgO6L.jpg"
+        },
+        {
+          "id": 777443,
+          "title": "The Electric State",
+          "poster": "/jRdxyW5ZmhD3ycStlb7gwOewTuE.jpg"
+        }
+      ],
+      "ratings": [],
+      "reviews": [],
+      "watchLaterTvShows": [
+        {
+          "id": 209876,
+          "title": "Dope Thief",
+          "poster": "/iR97LVoSHN4ITVtm4NnI2Zyli2O.jpg"
+        }
+      ]
+    },
+    {
+      "id": "e3ba",
+      "firstName": "Gara",
+      "lastName": "desert",
+      "age": "18",
+      "username": "gara",
+      "email": "gara@gmail.com",
+      "password": "gara",
+      "confirmPassword": "gara",
+      "playlist": [],
+      "likedMovies": [
+        {
+          "id": 278,
+          "title": "The Shawshank Redemption",
+          "poster": "/9cqNxx0GxF0bflZmeSMuL5tnGzr.jpg"
+        },
+        {
+          "id": 950396,
+          "title": "The Gorge",
+          "poster": "/7iMBZzVZtG0oBug4TfqDb9ZxAOa.jpg"
+        }
+      ],
+      "watchLater": [
+        {
+          "id": 278,
+          "title": "The Shawshank Redemption",
+          "poster": "/9cqNxx0GxF0bflZmeSMuL5tnGzr.jpg"
+        },
+        {
+          "id": 777443,
+          "title": "The Electric State",
+          "poster": "/jRdxyW5ZmhD3ycStlb7gwOewTuE.jpg"
+        },
+        {
+          "id": 950396,
+          "title": "The Gorge",
+          "poster": "/7iMBZzVZtG0oBug4TfqDb9ZxAOa.jpg"
+        }
+      ],
+      "ratings": [],
+      "reviews": []
+    },
+    {
+      "id": "58b4",
+      "firstName": "goku",
+      "lastName": "son",
+      "age": "32",
+      "username": "songoku",
+      "email": "goku@gmail.com",
+      "password": "goku",
+      "confirmPassword": "goku",
+      "playlist": [],
+      "likedMovies": [],
+      "watchLater": [],
+      "ratings": [],
+      "reviews": []
+    },
+    {
+      "id": "9a11",
+      "firstName": "sakura",
+      "lastName": "haruno",
+      "age": "17",
+      "username": "sakura",
+      "email": "sakura@gmail.com",
+      "password": "sakura",
+      "confirmPassword": "sakura",
+      "playlist": [],
+      "likedMovies": [],
+      "watchLater": [],
+      "ratings": [],
+      "reviews": []
+    }
+  ],
+  "reviews": [
+    {
+      "id": "1742095543690",
+      "movieId": "777443",
+      "userId": "9621",
+      "username": "naruto",
+      "rating": 4,
+      "reviewText": "this is a awesome"
+    },
+    {
+      "id": "1742095620812",
+      "movieId": "777443",
+      "userId": "c676",
+      "username": "sasuke",
+      "rating": 1,
+      "reviewText": "this is amazing"
+    },
+    {
+      "id": "1742095693355",
+      "movieId": "1241982",
+      "userId": "c676",
+      "username": "sasuke",
+      "rating": 4,
+      "reviewText": "i have always wanted to watch this movie"
+    },
+    {
+      "id": "1742096057708",
+      "movieId": "777443",
+      "userId": "e3ba",
+      "username": "gara",
+      "rating": 4,
+      "reviewText": "must watch this"
+    },
+    {
+      "id": "1742098346437",
+      "movieId": "278",
+      "userId": "e3ba",
+      "username": "gara",
+      "rating": 3,
+      "reviewText": "great"
+    },
+    {
+      "id": "1742107506428",
+      "movieId": "950396",
+      "userId": "e3ba",
+      "username": "gara",
+      "rating": 5,
+      "reviewText": "this is amazing"
+    },
+    {
+      "id": "1742107573202",
+      "movieId": "950396",
+      "userId": "9621",
+      "username": "naruto",
+      "rating": 5,
+      "reviewText": "awesome"
+    },
+    {
+      "id": "1742107633206",
+      "movieId": "950396",
+      "userId": "58b4",
+      "username": "songoku",
+      "rating": 4,
+      "reviewText": "wow"
+    },
+    {
+      "id": "1742117105285",
+      "movieId": "777443",
+      "userId": "9a11",
+      "username": "sakura",
+      "rating": 5,
+      "reviewText": "great"
+    }
+  ],
+  "ratings": []
+}
