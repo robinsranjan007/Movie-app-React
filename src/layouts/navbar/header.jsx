@@ -1,17 +1,28 @@
 import { FaHome, FaFilm, FaTv, FaUserCircle } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 import React, { useState, useEffect } from "react";
+import axios from "axios";
 
 const Header = () => {
   const navigate = useNavigate();
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [username, setUsername] = useState(null);
   const [role, setRole] = useState(null);
+  const [profileImage, setProfileImage] = useState(null); // ✅ Store profile picture
 
   useEffect(() => {
     // Get user details from localStorage
-    setUsername(localStorage.getItem("username"));
-    setRole(localStorage.getItem("role"));
+    const storedUserId = localStorage.getItem("userId");
+
+    if (storedUserId) {
+      axios.get(`http://localhost:5000/users/${storedUserId}`)
+        .then((response) => {
+          setUsername(response.data.username);
+          setRole(response.data.role);
+          setProfileImage(response.data.profileImage || null); // ✅ Get profile picture
+        })
+        .catch((error) => console.error("Error fetching user data:", error));
+    }
   }, []);
 
   const handleLogout = () => {
@@ -50,12 +61,20 @@ const Header = () => {
 
         {/* Profile Icon & Dropdown */}
         <div className="relative ml-auto">
-          {/* ✅ Clickable Profile Icon */}
+          {/* ✅ Clickable Profile Image */}
           <button
             onClick={() => setDropdownOpen(!dropdownOpen)}
             className="text-white text-3xl cursor-pointer focus:outline-none"
           >
-            <FaUserCircle />
+            {profileImage ? (
+              <img
+                src={profileImage}
+                alt="Profile"
+                className="w-10 h-10 rounded-full border-2 border-gray-400 object-cover"
+              />
+            ) : (
+              <FaUserCircle />
+            )}
           </button>
 
           {/* ✅ Dropdown (Shows when dropdownOpen is true) */}

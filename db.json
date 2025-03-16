@@ -68,7 +68,8 @@
           "title": "Solo Leveling",
           "poster": "/geCRueV3ElhRTr0xtJuEWJt6dJ1.jpg"
         }
-      ]
+      ],
+      "profileImage": "https://res.cloudinary.com/dkdkigppu/image/upload/v1742140382/kpdk6xxql7pvb70ucvfw.png"
     },
     {
       "id": "e3ba",
@@ -144,7 +145,8 @@
           "title": "Daredevil: Born Again",
           "poster": "/9lLuhV703HGCbnz6FxnqCwIwzAZ.jpg"
         }
-      ]
+      ],
+      "profileImage": "https://res.cloudinary.com/dkdkigppu/image/upload/v1742139807/ggls2wizpihma19tfj1o.png"
     },
     {
       "id": "4a89",
@@ -171,7 +173,24 @@
         }
       ],
       "ratings": [],
-      "reviews": []
+      "reviews": [],
+      "profileImage": "https://res.cloudinary.com/dkdkigppu/image/upload/v1742140545/l5828ugmwjmyf4ja6knu.jpg"
+    },
+    {
+      "id": "ce00",
+      "firstName": "momo",
+      "lastName": "momo",
+      "age": "22",
+      "username": "momo",
+      "email": "momo@gmail.com",
+      "password": "momo",
+      "confirmPassword": "momo",
+      "playlist": [],
+      "likedMovies": [],
+      "watchLater": [],
+      "ratings": [],
+      "reviews": [],
+      "profileImage": "https://res.cloudinary.com/dkdkigppu/image/upload/v1742140791/aiwlylfx1eflosinhnn2.jpg"
     }
   ],
   "reviews": [
@@ -310,6 +329,15 @@
       "username": "surbhi",
       "rating": 5,
       "reviewText": "it s a nice movie",
+      "adminReply": ""
+    },
+    {
+      "id": "1742140864778",
+      "movieId": "278",
+      "userId": "ce00",
+      "username": "momo",
+      "rating": 5,
+      "reviewText": "great",
       "adminReply": ""
     }
   ],
