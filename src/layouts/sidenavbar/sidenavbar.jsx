@@ -1,4 +1,5 @@
 import { NavLink, useNavigate } from "react-router-dom";
+import { FiUsers, FiMessageSquare, FiLogOut } from "react-icons/fi"; // 🎨 Icons
 
 const Sidenavbar = () => {
   const navigate = useNavigate();
@@ -25,40 +26,33 @@ const Sidenavbar = () => {
       {/* Navigation Menu */}
       <nav className="flex-grow">
         <ul>
+          {/* Users List */}
           <li>
             <NavLink
               to="/admin/users"
               className={({ isActive }) =>
-                `block py-3 px-6 transition duration-300 ${
+                `flex items-center py-3 px-6 transition duration-300 ${
                   isActive ? "bg-red-500 text-white" : "hover:bg-gray-700"
                 }`
               }
             >
+              <FiUsers className="mr-3" />
               Users List
             </NavLink>
           </li>
+
+          {/* Reviews List */}
           <li>
             <NavLink
-              to="/admin/movies"
+              to="/admin/reviews"
               className={({ isActive }) =>
-                `block py-3 px-6 transition duration-300 ${
+                `flex items-center py-3 px-6 transition duration-300 ${
                   isActive ? "bg-red-500 text-white" : "hover:bg-gray-700"
                 }`
               }
             >
-              Movies List
-            </NavLink>
-          </li>
-          <li>
-            <NavLink
-              to="/admin/tvshows"
-              className={({ isActive }) =>
-                `block py-3 px-6 transition duration-300 ${
-                  isActive ? "bg-red-500 text-white" : "hover:bg-gray-700"
-                }`
-              }
-            >
-              TV List
+              <FiMessageSquare className="mr-3" />
+              Reviews List
             </NavLink>
           </li>
         </ul>
@@ -67,8 +61,9 @@ const Sidenavbar = () => {
       {/* Logout Button */}
       <button
         onClick={handleLogout}
-        className="bg-red-600 hover:bg-red-700 text-white py-3 px-6 transition duration-300 w-full"
+        className="bg-red-600 hover:bg-red-700 flex items-center justify-center text-white py-3 px-6 transition duration-300 w-full"
       >
+        <FiLogOut className="mr-3" />
         Logout
       </button>
     </aside>

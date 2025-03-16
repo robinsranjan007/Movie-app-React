@@ -145,6 +145,33 @@
           "poster": "/9lLuhV703HGCbnz6FxnqCwIwzAZ.jpg"
         }
       ]
+    },
+    {
+      "id": "4a89",
+      "firstName": "surbhi",
+      "lastName": "surbhi",
+      "age": "22",
+      "username": "surbhi",
+      "email": "surbhi@gmail.com",
+      "password": "surbhi",
+      "confirmPassword": "surbhi",
+      "playlist": [],
+      "likedMovies": [
+        {
+          "id": 1315476,
+          "title": "Paradiso",
+          "poster": "/jN5fvKt25DtWVoPTRaEQgGmmMqd.jpg"
+        }
+      ],
+      "watchLater": [
+        {
+          "id": 1315476,
+          "title": "Paradiso",
+          "poster": "/jN5fvKt25DtWVoPTRaEQgGmmMqd.jpg"
+        }
+      ],
+      "ratings": [],
+      "reviews": []
     }
   ],
   "reviews": [
@@ -274,6 +301,15 @@
       "username": "surbhi",
       "rating": 5,
       "reviewText": "my fav",
+      "adminReply": ""
+    },
+    {
+      "id": "1742137290735",
+      "movieId": "1315476",
+      "userId": "4a89",
+      "username": "surbhi",
+      "rating": 5,
+      "reviewText": "it s a nice movie",
       "adminReply": ""
     }
   ],

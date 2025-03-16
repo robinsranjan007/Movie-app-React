@@ -10,11 +10,11 @@ import Signup from "../pages/Auth/Signup";
 import MyProfile from "../pages/Auth/myprofile/Myprofile";
 import Favorites from "../pages/user/Favorite/Favorites";
 import WatchLater from "../pages/user/Watchlater/Watchlater";
-import Movieslist from "../pages/admin/Movieslist";
-import Tvshowlists from "../pages/admin/Tvshowlists";
+
 import Userslist from "../pages/admin/users/Userslists";
 import Sidenavbar from "../layouts/sidenavbar/sidenavbar";
 import UserDetailsList from "../pages/admin/users/userdetails/userdetailslists";
+import ReviewsList from "../pages/admin/reviews/ReviewsList"; // ✅ Import Reviews List
 
 /** ✅ Protect User Routes */
 const ProtectedRoute = ({ element }) => {
@@ -34,7 +34,7 @@ const AdminLayout = () => {
     <div className="flex h-screen">
       <Sidenavbar /> {/* ✅ Sidebar appears only ONCE */}
       <main className="flex-1 p-6 bg-gray-100 overflow-auto">
-        <Outlet /> {/* ✅ Admin pages (Userslist, Movieslist) load here */}
+        <Outlet /> {/* ✅ Admin pages (Userslist, ReviewsList) load here */}
       </main>
     </div>
   );
@@ -60,10 +60,9 @@ const RouterComponent = () => {
       {/* ✅ Admin Routes with Sidebar */}
       <Route path="/admin/*" element={<AdminRoute element={<AdminLayout />} />}>
         <Route index element={<Navigate to="users" />} />
-        <Route path="movies" element={<Movieslist />} />
-        <Route path="tvshows" element={<Tvshowlists />} />
         <Route path="users" element={<Userslist />} />
-        <Route path="users/details/:userId" element={<UserDetailsList />} />  {/* ✅ FIXED */}
+        <Route path="users/details/:userId" element={<UserDetailsList />} />  
+        <Route path="reviews" element={<ReviewsList />} />  {/* ✅ Added Reviews List */}
       </Route>
     </Routes>
   );
