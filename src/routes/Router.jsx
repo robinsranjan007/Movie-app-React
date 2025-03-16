@@ -10,11 +10,11 @@ import Signup from "../pages/Auth/Signup";
 import MyProfile from "../pages/Auth/myprofile/Myprofile";
 import Favorites from "../pages/user/Favorite/Favorites";
 import WatchLater from "../pages/user/Watchlater/Watchlater";
-
 import Userslist from "../pages/admin/users/Userslists";
+import ReviewsList from "../pages/admin/reviews/ReviewsList";
+import Stats from "../pages/admin/stats/Stats"; // ✅ Import Stats Page
 import Sidenavbar from "../layouts/sidenavbar/sidenavbar";
 import UserDetailsList from "../pages/admin/users/userdetails/userdetailslists";
-import ReviewsList from "../pages/admin/reviews/ReviewsList"; // ✅ Import Reviews List
 
 /** ✅ Protect User Routes */
 const ProtectedRoute = ({ element }) => {
@@ -34,7 +34,7 @@ const AdminLayout = () => {
     <div className="flex h-screen">
       <Sidenavbar /> {/* ✅ Sidebar appears only ONCE */}
       <main className="flex-1 p-6 bg-gray-100 overflow-auto">
-        <Outlet /> {/* ✅ Admin pages (Userslist, ReviewsList) load here */}
+        <Outlet /> {/* ✅ Admin pages (Userslist, Stats, ReviewsList) load here */}
       </main>
     </div>
   );
@@ -61,8 +61,9 @@ const RouterComponent = () => {
       <Route path="/admin/*" element={<AdminRoute element={<AdminLayout />} />}>
         <Route index element={<Navigate to="users" />} />
         <Route path="users" element={<Userslist />} />
-        <Route path="users/details/:userId" element={<UserDetailsList />} />  
-        <Route path="reviews" element={<ReviewsList />} />  {/* ✅ Added Reviews List */}
+        <Route path="users/details/:userId" element={<UserDetailsList />} />
+        <Route path="reviews" element={<ReviewsList />} />
+        <Route path="stats" element={<Stats />} />  {/* ✅ Added Stats Route */}
       </Route>
     </Routes>
   );

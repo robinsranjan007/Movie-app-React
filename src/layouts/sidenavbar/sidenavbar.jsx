@@ -1,5 +1,5 @@
 import { NavLink, useNavigate } from "react-router-dom";
-import { FiUsers, FiMessageSquare, FiLogOut } from "react-icons/fi"; // 🎨 Icons
+import { FiUsers, FiMessageSquare, FiBarChart2, FiLogOut } from "react-icons/fi"; // 🎨 Icons
 
 const Sidenavbar = () => {
   const navigate = useNavigate();
@@ -53,6 +53,21 @@ const Sidenavbar = () => {
             >
               <FiMessageSquare className="mr-3" />
               Reviews List
+            </NavLink>
+          </li>
+
+          {/* Stats Page */}
+          <li>
+            <NavLink
+              to="/admin/stats"
+              className={({ isActive }) =>
+                `flex items-center py-3 px-6 transition duration-300 ${
+                  isActive ? "bg-red-500 text-white" : "hover:bg-gray-700"
+                }`
+              }
+            >
+              <FiBarChart2 className="mr-3" />
+              Stats
             </NavLink>
           </li>
         </ul>
