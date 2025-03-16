@@ -39,52 +39,34 @@
       "password": "naruto",
       "confirmPassword": "naruto",
       "playlist": [],
-      "likedMovies": [],
-      "watchLater": [],
-      "ratings": [],
-      "reviews": []
-    },
-    {
-      "id": "c676",
-      "firstName": "sasuke",
-      "lastName": "uchiha",
-      "age": "17",
-      "username": "sasuke",
-      "email": "sasuke@gmail.com",
-      "password": "sasuke",
-      "confirmPassword": "sasuke",
-      "playlist": [],
       "likedMovies": [
         {
-          "id": 1241982,
-          "title": "Moana 2",
-          "poster": "/aLVkiINlIeCkcZIzb7XHzPYgO6L.jpg"
-        },
-        {
-          "id": 777443,
-          "title": "The Electric State",
-          "poster": "/jRdxyW5ZmhD3ycStlb7gwOewTuE.jpg"
+          "id": 278,
+          "title": "The Shawshank Redemption",
+          "poster": "/9cqNxx0GxF0bflZmeSMuL5tnGzr.jpg"
         }
       ],
       "watchLater": [
         {
-          "id": 1241982,
-          "title": "Moana 2",
-          "poster": "/aLVkiINlIeCkcZIzb7XHzPYgO6L.jpg"
-        },
-        {
-          "id": 777443,
-          "title": "The Electric State",
-          "poster": "/jRdxyW5ZmhD3ycStlb7gwOewTuE.jpg"
+          "id": 278,
+          "title": "The Shawshank Redemption",
+          "poster": "/9cqNxx0GxF0bflZmeSMuL5tnGzr.jpg"
         }
       ],
       "ratings": [],
       "reviews": [],
       "watchLaterTvShows": [
         {
-          "id": 209876,
-          "title": "Dope Thief",
-          "poster": "/iR97LVoSHN4ITVtm4NnI2Zyli2O.jpg"
+          "id": 127532,
+          "title": "Solo Leveling",
+          "poster": "/geCRueV3ElhRTr0xtJuEWJt6dJ1.jpg"
+        }
+      ],
+      "likedTvShows": [
+        {
+          "id": 127532,
+          "title": "Solo Leveling",
+          "poster": "/geCRueV3ElhRTr0xtJuEWJt6dJ1.jpg"
         }
       ]
     },
@@ -113,6 +95,11 @@
           "id": 777443,
           "title": "The Electric State",
           "poster": "/jRdxyW5ZmhD3ycStlb7gwOewTuE.jpg"
+        },
+        {
+          "id": 238,
+          "title": "The Godfather",
+          "poster": "/3bhkrj58Vtu7enYsRolD1fZdja1.jpg"
         }
       ],
       "watchLater": [
@@ -130,6 +117,11 @@
           "id": 950396,
           "title": "The Gorge",
           "poster": "/7iMBZzVZtG0oBug4TfqDb9ZxAOa.jpg"
+        },
+        {
+          "id": 238,
+          "title": "The Godfather",
+          "poster": "/3bhkrj58Vtu7enYsRolD1fZdja1.jpg"
         }
       ],
       "ratings": [],
@@ -139,6 +131,18 @@
           "id": 71914,
           "title": "The Wheel of Time",
           "poster": "/eVm7vI0VTUKYzgpOXCUu9qz3L4E.jpg"
+        },
+        {
+          "id": 202555,
+          "title": "Daredevil: Born Again",
+          "poster": "/9lLuhV703HGCbnz6FxnqCwIwzAZ.jpg"
+        }
+      ],
+      "likedTvShows": [
+        {
+          "id": 202555,
+          "title": "Daredevil: Born Again",
+          "poster": "/9lLuhV703HGCbnz6FxnqCwIwzAZ.jpg"
         }
       ]
     }
@@ -157,7 +161,7 @@
     {
       "id": "1742095693355",
       "movieId": "1241982",
-      "userId": "c676",
+      "userId": null,
       "username": "sasuke",
       "rating": 4,
       "reviewText": "i have always wanted to watch this movie",
@@ -192,16 +196,6 @@
       "adminReply": ""
     },
     {
-      "id": "1742117105285",
-      "movieId": "777443",
-      "userId": "9a11",
-      "username": "sakura",
-      "rating": 5,
-      "reviewText": "great",
-      "adminReply": "thanks sakura",
-      "reply": "Thanks sakura"
-    },
-    {
       "id": "1742122094586",
       "movieId": "1126166",
       "userId": "e3ba",
@@ -226,16 +220,61 @@
       "username": "gara",
       "rating": 5,
       "reviewText": "blah blah",
-      "adminReply": ""
+      "adminReply": "hahahaha"
     },
     {
-      "id": "1742130345376",
+      "id": "1742134824138",
       "movieId": "777443",
       "userId": "e3ba",
       "username": "gara",
       "rating": 5,
-      "reviewText": "thats great movie",
-      "adminReply": "thanks for the feedback"
+      "reviewText": "this is amazing",
+      "adminReply": "its amazing"
+    },
+    {
+      "id": "1742135382854",
+      "movieId": "101604",
+      "userId": "e3ba",
+      "username": "gara",
+      "rating": 5,
+      "reviewText": "this is awesome",
+      "adminReply": ""
+    },
+    {
+      "id": "1742135542393",
+      "movieId": "202555",
+      "userId": "e3ba",
+      "username": "gara",
+      "rating": 5,
+      "reviewText": "this is nice",
+      "adminReply": ""
+    },
+    {
+      "id": "1742136459938",
+      "movieId": "278",
+      "userId": "9621",
+      "username": "naruto",
+      "rating": 5,
+      "reviewText": "this is great",
+      "adminReply": ""
+    },
+    {
+      "id": "1742136475694",
+      "movieId": "127532",
+      "userId": "9621",
+      "username": "naruto",
+      "rating": 5,
+      "reviewText": "my fav",
+      "adminReply": ""
+    },
+    {
+      "id": "1742136601599",
+      "movieId": "108978",
+      "userId": null,
+      "username": "surbhi",
+      "rating": 5,
+      "reviewText": "my fav",
+      "adminReply": ""
     }
   ],
   "ratings": []

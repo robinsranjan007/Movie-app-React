@@ -6,6 +6,7 @@ const Userslist = () => {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [deleteUserId, setDeleteUserId] = useState(null); // Track user to be deleted
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -26,9 +27,23 @@ const Userslist = () => {
     fetchUsers();
   }, []);
 
-  // Function to handle delete (For now, it just shows an alert)
-  const handleDelete = (userId) => {
-    alert(`⚠️ Warning: Are you sure you want to delete user ID ${userId}?`);
+  // Function to handle delete confirmation
+  const confirmDelete = (userId) => {
+    setDeleteUserId(userId);
+  };
+
+  // Function to handle actual deletion
+  const handleDelete = async () => {
+    if (!deleteUserId) return;
+
+    try {
+      await axios.delete(`http://localhost:5000/users/${deleteUserId}`);
+      setUsers(users.filter((user) => user.id !== deleteUserId));
+      setDeleteUserId(null); // Close modal after deleting
+    } catch (error) {
+      console.error("Error deleting user:", error);
+      alert("Failed to delete user.");
+    }
   };
 
   // Function to navigate to user details page
@@ -61,14 +76,16 @@ const Userslist = () => {
               <th className="py-3 px-4 border">Username</th>
               <th className="py-3 px-4 border">Email</th>
               <th className="py-3 px-4 border">Role</th>
-              <th className="py-3 px-4 border">Actions</th> {/* New Action Column */}
+              <th className="py-3 px-4 border">Actions</th>
             </tr>
           </thead>
           <tbody>
             {users.map((user, index) => (
               <tr key={index} className="border-b hover:bg-gray-200">
                 <td className="py-2 px-4 border">{user.id}</td>
-                <td className="py-2 px-4 border">{user.firstName} {user.lastName}</td>
+                <td className="py-2 px-4 border">
+                  {user.firstName} {user.lastName}
+                </td>
                 <td className="py-2 px-4 border">{user.username}</td>
                 <td className="py-2 px-4 border">{user.email}</td>
                 <td className="py-2 px-4 border text-red-500">{user.role || "User"}</td>
@@ -82,7 +99,7 @@ const Userslist = () => {
                   </button>
                   {/* Delete Button */}
                   <button
-                    onClick={() => handleDelete(user.id)}
+                    onClick={() => confirmDelete(user.id)}
                     className="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-700"
                   >
                     Delete
@@ -92,6 +109,30 @@ const Userslist = () => {
             ))}
           </tbody>
         </table>
+      )}
+
+      {/* Delete Confirmation Modal */}
+      {deleteUserId && (
+        <div className="fixed inset-0 bg-gray-800 bg-opacity-50 flex justify-center items-center">
+          <div className="bg-white p-6 rounded-lg shadow-lg">
+            <h2 className="text-lg font-bold">⚠️ Confirm Deletion</h2>
+            <p>Are you sure you want to delete this user?</p>
+            <div className="flex justify-end mt-4">
+              <button
+                onClick={() => setDeleteUserId(null)}
+                className="bg-gray-400 text-white px-3 py-1 rounded mr-2 hover:bg-gray-600"
+              >
+                Cancel
+              </button>
+              <button
+                onClick={handleDelete}
+                className="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-700"
+              >
+                Delete
+              </button>
+            </div>
+          </div>
+        </div>
       )}
     </div>
   );

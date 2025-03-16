@@ -88,6 +88,36 @@ const UserDetailsList = () => {
         )}
       </ul>
 
+      {/* Watch Later TV Shows */}
+      <h2 className="text-xl font-bold mt-4">📌 Watch Later TV Shows</h2>
+      <ul className="bg-white p-4 shadow-lg rounded-lg mb-4">
+        {user.watchLaterTvShows?.length > 0 ? (
+          user.watchLaterTvShows.map((tvShow) => (
+            <li key={tvShow.id} className="border-b py-2 flex justify-between">
+              <span>📺 {tvShow.title}</span>
+              <Link to={`/tv-shows/${tvShow.id}`} className="text-blue-500 hover:underline">View Details</Link>
+            </li>
+          ))
+        ) : (
+          <p className="text-gray-500">No TV shows added to Watch Later.</p>
+        )}
+      </ul>
+
+      {/* Favorite TV Shows */}
+      <h2 className="text-xl font-bold mt-4">⭐ Favorite TV Shows</h2>
+      <ul className="bg-white p-4 shadow-lg rounded-lg mb-4">
+        {user.likedTvShows?.length > 0 ? (
+          user.likedTvShows.map((tvShow) => (
+            <li key={tvShow.id} className="border-b py-2 flex justify-between">
+              <span>📺 {tvShow.title}</span>
+              <Link to={`/tv-shows/${tvShow.id}`} className="text-blue-500 hover:underline">View Details</Link>
+            </li>
+          ))
+        ) : (
+          <p className="text-gray-500">No TV shows added to Favorites.</p>
+        )}
+      </ul>
+
       {/* Reviewed Movies */}
       <h2 className="text-xl font-bold mt-4">📝 Reviewed Movies</h2>
       <ul className="bg-white p-4 shadow-lg rounded-lg">
