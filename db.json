@@ -302,7 +302,7 @@
       "username": "naruto",
       "rating": 5,
       "reviewText": "this is great",
-      "adminReply": ""
+      "adminReply": "thanks for the feedback"
     },
     {
       "id": "1742136475694",
@@ -338,7 +338,7 @@
       "username": "momo",
       "rating": 5,
       "reviewText": "great",
-      "adminReply": ""
+      "adminReply": "yesa"
     }
   ],
   "ratings": []
